@@ -11,8 +11,14 @@ Juan Manuel Rodríguez Mejía
 cd <any folder>
 git clone https://gitlab.tu-ilmenau.de/juro7695/ADPS-Project_04-Audio_processing_web_based_tool.git
 cd ADPS-Project_04-Audio_processing_web_based_tool
-pip install -r requirements.txt
+
 ```
+
+## conda env
+
+pip install -r requirements.txt
+conda create --name ADSP-P-4 python==3.11.7
+conda activate ADSP-P-4
 
 ## Integrate with your tools
 
