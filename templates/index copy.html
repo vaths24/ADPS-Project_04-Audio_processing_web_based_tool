@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Processing Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Audio Processing Tool</h2>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="upload-tab" data-bs-toggle="tab" href="#upload" role="tab">Upload</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="analyze-tab" data-bs-toggle="tab" href="#analyze" role="tab">Analysis</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="filter-tab" data-bs-toggle="tab" href="#filter" role="tab">Filtering</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="convolve-tab" data-bs-toggle="tab" href="#convolve" role="tab">Convolution</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="effects-tab" data-bs-toggle="tab" href="#effects" role="tab">Effects</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4">
+        <!-- Upload Tab Content -->
+        <div class="tab-pane fade show active" id="upload" role="tabpanel">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file" class="form-label">Choose Audio File</label>
+                    <input type="file" class="form-control" id="file" name="file" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+
+        <!-- Analysis Tab Content -->
+        <div class="tab-pane fade" id="analyze" role="tabpanel">
+            <form action="/analyze" method="post">
+                <div class="mb-3">
+                    <label for="filename" class="form-label">Filename</label>
+                    <input type="text" class="form-control" id="filename" name="filename" required>
+                </div>
+                <div class="mb-3">
+                    <label for="analysis_type" class="form-label">Select Analysis Type</label>
+                    <select class="form-control" id="analysis_type" name="analysis_type" required>
+                        <option value="fft">FFT</option>
+                        <option value="stft">STFT</option>
+                        <option value="dtf">DTF</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Analyze</button>
+            </form>
+            {% if analysis_plot %}
+            <div class="mt-4">
+                <h5>Analysis Plot</h5>
+                <img src="{{ analysis_plot }}" alt="Analysis Plot" class="img-fluid">
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Filtering Tab Content -->
+        <div class="tab-pane fade" id="filter" role="tabpanel">
+            <form action="/filter" method="post">
+                <div class="mb-3">
+                    <label for="filename" class="form-label">Filename</label>
+                    <input type="text" class="form-control" id="filename" name="filename" required>
+                </div>
+                <div class="mb-3">
+                    <label for="filter_type" class="form-label">Select Filter Type</label>
+                    <select class="form-control" id="filter_type" name="filter_type" required>
+                        <option value="lpf">Low Pass Filter</option>
+                        <option value="hpf">High Pass Filter</option>
+                        <option value="bpf">Band Pass Filter</option>
+                        <option value="apf">Band Pass Filter</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Apply Filter</button>
+            </form>
+            {% if filter_plot %}
+            <div class="mt-4">
+                <h5>Filter Plot</h5>
+                <img src="{{ filter_plot }}" alt="Filter Plot" class="img-fluid">
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Similarly add sections for Convolution and Effects with conditional image display -->
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

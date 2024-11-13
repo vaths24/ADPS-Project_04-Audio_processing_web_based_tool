@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Processing App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Audio Processing Application</h1>
+
+    <!-- Upload Form -->
+    <div class="mt-4">
+        <h3>Upload an Audio File</h3>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" name="file" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload File</button>
+        </form>
+    </div>
+
+    {% if filename %}
+    <!-- Display Uploaded Audio -->
+    <div class="mt-4">
+        <h3>Uploaded File</h3>
+        <audio controls>
+            <source src="{{ url_for('static', filename='uploads/' + filename) }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Tabs for Sections -->
+    <div class="mt-4">
+        <ul class="nav nav-tabs" id="audioProcessingTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="fft-tab" data-toggle="tab" href="#fft" role="tab" aria-controls="fft" aria-selected="true">FFT, DFT, STFT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="filters-tab" data-toggle="tab" href="#filters" role="tab" aria-controls="filters" aria-selected="false">Filters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="convolution-tab" data-toggle="tab" href="#convolution" role="tab" aria-controls="convolution" aria-selected="false">Convolution</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="effects-tab" data-toggle="tab" href="#effects" role="tab" aria-controls="effects" aria-selected="false">Audio Effects</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="audioProcessingTabsContent">
+
+            <!-- FFT, DFT, STFT Section -->
+            <div class="tab-pane fade show active" id="fft" role="tabpanel" aria-labelledby="fft-tab">
+                <h3>FFT, DFT, STFT Analysis</h3>
+                <form action="/analyze" method="POST">
+                    <input type="hidden" name="filename" value="{{ filename }}">
+                    <div class="form-group">
+                        <label for="analysis_type">Select Analysis Type</label>
+                        <select name="analysis_type" class="form-control" required>
+                            <option value="fft">FFT</option>
+                            <option value="stft">STFT</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-info">Analyze</button>
+                </form>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="tab-pane fade" id="filters" role="tabpanel" aria-labelledby="filters-tab">
+                <h3>Apply Filters</h3>
+                <form action="/filter" method="POST">
+                    <input type="hidden" name="filename" value="{{ filename }}">
+                    <div class="form-group">
+                        <label for="filter_type">Select Filter Type</label>
+                        <select name="filter_type" class="form-control" required>
+                            <option value="lpf">Low Pass Filter</option>
+                            <option value="hpf">High Pass Filter</option>
+                            <option value="bpf">Band Pass Filter</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">Apply Filter</button>
+                </form>
+            </div>
+
+            <!-- Convolution Section -->
+            <div class="tab-pane fade" id="convolution" role="tabpanel" aria-labelledby="convolution-tab">
+                <h3>Apply Convolution</h3>
+                <form action="/convolve" method="POST">
+                    <input type="hidden" name="filename" value="{{ filename }}">
+                    <button type="submit" class="btn btn-warning">Apply Convolution</button>
+                </form>
+            </div>
+
+            <!-- Audio Effects Section -->
+            <div class="tab-pane fade" id="effects" role="tabpanel" aria-labelledby="effects-tab">
+                <h3>Apply Audio Effects</h3>
+                <form action="/effects" method="POST">
+                    <input type="hidden" name="filename" value="{{ filename }}">
+                    <div class="form-group">
+                        <label for="effect_type">Select Audio Effect</label>
+                        <select name="effect_type" class="form-control" required>
+                            <option value="echo">Echo</option>
+                            <option value="pitch">Pitch Shift</option>
+                            <option value="frequency">Frequency Shift</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Apply Effect</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

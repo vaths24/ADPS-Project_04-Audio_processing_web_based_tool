@@ -16,20 +16,41 @@ cd ADPS-Project_04-Audio_processing_web_based_tool
 
 ## conda env
 
-pip install -r requirements.txt
 conda create --name ADSP-P-4 python==3.11.7
 conda activate ADSP-P-4
+pip install -r requirements.txt
 
 ## Integrate with your tools
 
 - [ ] Front-end: Python code language
 - [ ] Back-end: [Flask Library](https://flask.palletsprojects.com/en/stable/)
 
+## Structure
 
+project_folder/
+├── app.py                    # Flask application
+├── templates/
+│   ├── index.html            # Main HTML file with tabs
+│   └── results.html          # Display processing results
+└── static/
+│   └── uploads/              # Folder to save uploaded files
+├── scripts/                   # Functions for the app.py
+│   ├── all_filters.py    
+│   ├── audio_effects.py            
+│   ├── filters.py            
+│   ├── fourier_filters.py            
+│   └── overlap_convolution.py   
+├── README.md
+└── requirements.txt
 
 ***
 
-# Editing this README
+# Execusion
+
+    python app.py
+
+Copy the "Running on http:" route that per default should look like this http://127.0.0.1:5000.
+
 
 When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
