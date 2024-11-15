@@ -7,15 +7,15 @@ Juan Manuel Rodríguez Mejía
 
 ## First steps
 
-cd <any folder>
-git clone https://gitlab.tu-ilmenau.de/juro7695/ADPS-Project_04-Audio_processing_web_based_tool.git
-cd ADPS-Project_04-Audio_processing_web_based_tool
+    cd <any folder>
+    git clone https://gitlab.tu-ilmenau.de/juro7695/ADPS-Project_04-Audio_processing_web_based_tool.git
+    cd ADPS-Project_04-Audio_processing_web_based_tool
 
 ## conda env
 
-conda create --name ADSP-P-4 python==3.11.7
-conda activate ADSP-P-4
-pip install -r requirements.txt
+    conda create --name ADSP-P-4 python==3.11.7
+    conda activate ADSP-P-4
+    pip install -r requirements.txt
 
 ## Integrate with your tools
 
